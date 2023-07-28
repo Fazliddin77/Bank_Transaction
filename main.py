@@ -9,7 +9,7 @@ conn = psycopg2.connect(
 )
 cur = conn.cursor()
 
-
+# You can transfer money here
 def transfer_money(sender_id_card, recipient_id_card, money):
     try:
         cur.execute("START TRANSACTION")
@@ -29,16 +29,16 @@ def transfer_money(sender_id_card, recipient_id_card, money):
         cur.execute("ROLLBACK")
         print("Transaction failed Error:", str(Exception))
 
-
+# You can check balance here
 def check_balance(check):
     cur.execute("SELECT name, balance FROM bank WHERE id_card = %s", (check,))
     print(cur.fetchall())
 
-
+# You can make deposit here
 def make_deposit(money, date):
     cur.execute("INSERT INTO bank (deposit, deposit_year) VALUES (%s, %s)", (money, date))
 
-
+# You can show_deposit  here
 def show_deposit(date):
     cur.execute("SELECT name, deposit, deposit_year FROM bank WHERE deposit_year = %s", (date,))
     print(cur.fetchall())
@@ -47,7 +47,7 @@ def show_deposit(date):
 def exit():
     return ERROR
 
-
+# You can choose number here
 def choose():
     while True:
         print("[1] Transfer Money")
